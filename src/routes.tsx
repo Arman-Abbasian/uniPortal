@@ -1,43 +1,20 @@
-import App from '@/App'
 import { lazy } from 'react'
-
-// Lazy load all components
-const Home = lazy(() => import('@/pages/Home'))
-
-// Auth components
-const OTP = lazy(() => import('@/pages/auth/OTP'))
-const Login = lazy(() => import('@/pages/auth/Login'))
-const Signup = lazy(() => import('@/pages/auth/Signup'))
-
-// Services components
-const Services = lazy(() => import('@/pages/Services/services'))
-const ServicesHome = lazy(
-  () => import('@/pages/Services/ServicesHome/ServicesHome')
-)
-const ServiceList = lazy(() => import('@/pages/Services/ServiceList'))
-const Pharmacy = lazy(() => import('@/pages/Services/PharmacyForm'))
-const ServiceForm = lazy(() => import('@/pages/Services/ServiceForm'))
-
-// Profile components
-const Profile = lazy(() => import('@/pages/Profile'))
-const ProfileHome = lazy(() => import('@/pages/Profile/ProfileHome'))
-const Identity = lazy(() => import('@/pages/Profile/Identity'))
-const Notifications = lazy(() => import('@/pages/Profile/Notifications'))
-const Orders = lazy(() => import('@/pages/Profile/Orders/Orders'))
-const MedicalRecord = lazy(() => import('@/pages/Profile/MedicalRecord'))
-const Addresses = lazy(() => import('@/pages/Profile/Addresses'))
-const Checkout = lazy(() => import('@/pages/Profile/Checkout/Checkout'))
-const Wallet = lazy(() => import('@/pages/Profile/Wallet/Wallet'))
-
-// Other components
-const Contact = lazy(() => import('@/pages/ContactUs/Contact'))
-
-const UserRoutes = lazy(() => import('@/components/UserRoutes'))
-const GuestRoutes = lazy(() => import('@/components/GuestRoutes'))
-const UnderUpdatePage = lazy(
-  () => import('@/pages/UnderUpdate/UnderUpdatePage')
-)
-const NotFound = lazy(() => import('@/pages/NotFound'))
+import ProfessorMain from '@/pages/professor/main/Index'
+import App from '@/App'
+import AdminMain from '@/pages/admin/main/Index'
+import UserForm from '@/pages/admin/userForm/Index'
+import UserList from '@/pages/admin/userList/Index'
+import FacultyForm from '@/pages/admin/facultyForm/Index'
+import FacultyList from '@/pages/admin/facultyList/Index'
+import UserRoutes from '@/components/UserRoutes'
+import GuestRoutes from '@/components/GuestRoutes'
+import Home from '@/pages/Home'
+import Login from '@/pages/auth/login/Index'
+import CourseReserveForm from '@/pages/professor/courseReserveForm/Index'
+import CourseReserveList from '@/pages/professor/courseReserveList/Index'
+import StudentMain from '@/pages/student/main/Index'
+import CoursePlan from '@/pages/student/coursePlan/Index'
+import SelfPlan from '@/pages/student/selfPlan/Index'
 
 export const routes = [
   {
@@ -48,46 +25,43 @@ export const routes = [
       {
         path: 'auth',
         element: <GuestRoutes />,
-        children: [
-          { path: 'login', element: <Login /> },
-          { path: 'signup', element: <Signup /> },
-          { path: 'otp', element: <OTP /> },
-        ],
+        children: [{ path: 'login', element: <Login /> }],
       },
 
       {
         element: <UserRoutes />,
         children: [
           {
-            path: 'services',
-            element: <Services />,
+            path: 'admin',
+            element: <AdminMain />,
             children: [
-              { index: true, element: <ServicesHome /> },
-              { path: 'serviceList', element: <ServiceList /> },
-              { path: 'pharmacyForm', element: <Pharmacy /> },
-              { path: 'serviceForm', element: <ServiceForm /> },
+              { index: true, element: <AdminMain /> },
+              { index: 'userForm', element: <UserForm /> },
+              { path: 'userList', element: <UserList /> },
+              { path: 'facultyForm', element: <FacultyForm /> },
+              { path: 'facultyList', element: <FacultyList /> },
             ],
           },
           {
-            path: 'profile',
-            element: <Profile />,
+            path: 'professor',
+            element: <ProfessorMain />,
             children: [
-              { index: true, element: <ProfileHome /> },
-              { path: 'identity', element: <Identity /> },
-              { path: 'checkout', element: <Checkout /> },
-              { path: 'wallet', element: <Wallet /> },
-              { path: 'notifications', element: <Notifications /> },
-              { path: 'orders', element: <Orders /> },
-              { path: 'medical-record', element: <MedicalRecord /> },
-              { path: 'addresses', element: <Addresses /> },
+              { index: true, element: <ProfessorMain /> },
+              { path: 'identity', element: <CourseReserveForm /> },
+              { path: 'checkout', element: <CourseReserveList /> },
+            ],
+          },
+          {
+            path: 'student',
+            element: <StudentMain />,
+            children: [
+              { index: true, element: <StudentMain /> },
+              { path: 'identity', element: <CoursePlan /> },
+              { path: 'checkout', element: <SelfPlan /> },
             ],
           },
         ],
       },
-
-      { path: 'contact', element: <Contact /> },
-      { path: 'underupdatepage', element: <UnderUpdatePage /> },
-      { path: '*', element: <NotFound /> },
     ],
   },
 ]
