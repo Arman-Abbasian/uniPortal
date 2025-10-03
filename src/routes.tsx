@@ -47,8 +47,8 @@ export const routes = [
             element: <ProfessorMain />,
             children: [
               { index: true, element: <ProfessorMain /> },
-              { path: 'identity', element: <CourseReserveForm /> },
-              { path: 'checkout', element: <CourseReserveList /> },
+              { path: 'courseReserveForm', element: <CourseReserveForm /> },
+              { path: 'courseReserveList', element: <CourseReserveList /> },
             ],
           },
           {
@@ -56,8 +56,8 @@ export const routes = [
             element: <StudentMain />,
             children: [
               { index: true, element: <StudentMain /> },
-              { path: 'identity', element: <CoursePlan /> },
-              { path: 'checkout', element: <SelfPlan /> },
+              { path: 'coursePlan', element: <CoursePlan /> },
+              { path: 'selfPlan', element: <SelfPlan /> },
             ],
           },
         ],
